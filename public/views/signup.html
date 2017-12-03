@@ -16,13 +16,13 @@
         <input type="text" placeholder="username" ng-model="username"/>
       </div>
       <div class="u-form-group">
-        <input type="password" placeholder="Password" ng-model="password"/>
+        <input type="password" placeholder="Password" name="password " ng-model="password"/>
       </div>
       <div class="u-form-group">
-        <input type="password" placeholder="Confirm Password"/>
+        <input type="password" placeholder="Confirm Password" ng-model="repeat"/>
       </div>
       <div class="u-form-group">
-        <button>Sign Up</button>
+        <button ng-click="signup()">Sign Up</button>
       </div>
     </form>
 

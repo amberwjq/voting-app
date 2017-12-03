@@ -1,29 +1,32 @@
- <!-- NAVBAR -->
- <div class="navbar navbar-inverse navbar-fixed-top custom-navbar" ng-controller="mvMainCtrl" ng-show="identity.isAuthenticated()">
-        <div class="container">
-           <div class="navbar-header">
-              <a class="navbar-brand" href="#">VotePlex</a>
-             
-           </div>
-           <div>
-              <ul class="nav navbar-nav pull-right" ng-controller="mvNavBarLoginCtrl">
+<div ng-controller="mvNavBarLoginCtrl">
+        <header class="banner" ng-show="identity.isAuthenticated()">
+                <div class="container text-center">
+                   <div class="row">
+                      <h1>Dashboard</h1>
+                      <h4>What would you like to do today?</h4>
+                      <a href="#!newpoll" class="btn btn-success" role="button">New Poll</a>
+                      <a href="#!mypoll" class="btn btn-primary" role="button">My Polls</a>
+                      <a href="#!poll" class="btn btn-info" role="button">View all polls</a>
+                      
+                   
+                   </div>
+                </div>
+             </header>  
+             <br>
+             <br>
 
-                 <li><a href="/" ng-click="signout()">Logout</a></li>
-              </ul>
-           </div>
-        </div>
-     </div>
-     <!-- BANNER -->
-     <header class="banner">
-        <div class="container text-center"">
-           <div class="row" ng-repeat="course in courses | filter:{featured:true}">
-                <div class="col-md-12">
-                        {{course.name}}
-                    </div>
-                  
-           </div>
-        </div>
-     </header>
-     <br><br>
+</div>
+
+     <div class="container text-center">
+         <h3>All Polls</h4>
+         <h4>Click one to vote!</h4>
+        <div class="list-group" ng-repeat="poll in polls">
+                <a href="#!details/{{poll.subject}}" class="list-group-item list-group-item-action">
+                   {{poll.subject}}
+                </a>
+               
+        </div>   
+    </div>>
+     
 
        

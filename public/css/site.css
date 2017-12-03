@@ -5,10 +5,10 @@
     margin: 0 ;
     padding: 0;
     font-family: 'Varela Round', sans-serif;
-    background-color: #DDDDDD;
+    background-color:#E4DBBF;
   }
   .custom-navbar {
-     background-color: #DDDDDD;
+     background-color:#404040;
     height: 60px;
     border-bottom: 0px;
     transition: background-color .5s ease 0s;
@@ -190,4 +190,11 @@
  }
  .toast-success{
    background-color: #d94c3a;
+ }
+
+ .poll-details{
+
+  background-color:#ECEAE0;
+  margin-top:100px;
+  height: 500px;
  }

@@ -6,7 +6,8 @@ exports.authenticate = function(req,res,next){
         //ask Passport to login this user.XHR
         req.logIn(user, function(err) {
           if(err) {return next(err);}
-          
+          req.session.user = user; 
+          console.log('req.session.user is ' + req.session.user);         
           res.send({success:true, user: user});
           
           
@@ -14,5 +15,6 @@ exports.authenticate = function(req,res,next){
         })
       })
       auth(req, res, next);
+
 
 }

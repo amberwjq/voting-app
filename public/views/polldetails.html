@@ -1,0 +1,29 @@
+    <br>
+     <br>
+     <div class="container poll-details" >
+         <div class="row">
+             <div class="col-sm-6">
+                    <h3>{{poll.subject}}</h3>
+                    <h4>I'd like to vote for</h4>
+                    <!-- <div class="dropdown">
+                            <button class="btn  dropdown-toggle"  type="button" data-toggle="dropdown">
+                              Choose an option
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                              <li><a href="#">{{poll.option1.name}}</a></li>
+                              <li><a href="#">{{poll.option2.name}}</a></li>
+                            </ul>
+                    </div>  -->
+                    <select class="col-xs-3" ng-model="selectedName" ng-options="x.name for x in options">
+                        </select>
+                      <br> 
+                      <h1>You selected: {{selectedName.name}}</h1>
+                      <p>Its number is: {{selectedName.voted}}</p>                      
+                    <button class="btn btn-success" ng-click="vote()">Submit</button>                               
+             </div>
+             <div class="col-sm-6" id="chart">
+  
+            </div>             
+         </div>
+    </div>>

@@ -7,41 +7,54 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/vendor/toastr/toastr.css">
     <link rel="stylesheet"  href="/css/site.css">
+    <script type="text/javascript"  src="/vendor/jquery/dist/jquery.js"></script> 
+    <script type="text/javascript" src="/vendor/bootstrap/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="/vendor/d3.min.js"></script>
+
 </head>
 
 <body ng-app="app">
-  <div ng-controller="mvNavBarLoginCtrl">
+
+    <div class="navbar navbar-inverse navbar-fixed-top custom-navbar" ng-controller="mvNavBarLoginCtrl">
+        <div class="container>
+           <div class="navbar-header">
+              <a class="navbar-brand" href="/#!poll">VotePlex</a>        
+           </div>
+           <div>
+              <ul class="nav navbar-nav pull-right" ng-hide="identity.isAuthenticated()">           
+                 <li><a href="#!signup">Sign up</a></li>
+                 <li><a href="#!login">Login</a></li>
+              </ul>
+              <ul class="nav navbar-nav pull-right" ng-show="identity.isAuthenticated()">               
+                <li><a href="/" ng-click="signout()">Logout</a></li>
+                <li>Hello {{identity.currentUser.username}}</li>
+            </ul>         
+           </div>
+        </div>
+
+        <div ng-view></div>
+
      <!-- NAVBAR -->
- <div class="navbar navbar-inverse navbar-fixed-top custom-navbar" >
-    <div class="container">
-       <div class="navbar-header">
-          <a class="navbar-brand" href="/">VotePlex</a>        
-       </div>
-       <div>
-          <ul class="nav navbar-nav pull-right" ng-hide="identity.isAuthenticated()">           
-             <li><a href="#!signup">Sign up</a></li>
-             <li><a href="#!login">Login</a></li>
-          </ul>
-       </div>
-    </div>
- </div>
-    <div ng-view></div>
+
    
     
 
-  </div>
+
  
 
-     <script type="text/javascript"  src="/vendor/jquery/dist/jquery.js"></script>
+   
      <script type="text/javascript" src="/vendor/angular/angular.js"></script>
      <script type="text/javascript" src="/vendor/toastr/toastr.js"></script>
+     
      <script type="text/javascript", src="/vendor/angular-resource/angular-resource.js"></script>
      <script type="text/javascript", src="/vendor/angular-route/angular-route.js"></script>
      <script type="text/javascript", src="/app/app.js"></script>
      <script type="text/javascript", src="/app/main/mvMainCtrl.js"></script>
+     <script type="text/javascript", src="/app/main/mvPollCtrl.js"></script>
      <script type="text/javascript", src="/app/account/mvNavBarLoginCtrl.js"></script>
      <script type="text/javascript", src="/app/account/mvSignupCtrl.js"></script>     
       <script type="text/javascript", src="/app/account/mvIdentity.js"></script>
       <script type="text/javascript", src="/app/common/mvNotifier.js"></script>
+
 </body>
 </html>

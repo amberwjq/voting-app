@@ -1,5 +1,5 @@
 var mongoose =require('mongoose');
-var userModel = require('../models/userModel');
+var User = require('../models/user');
 
 
 module.exports=function(config){
@@ -9,10 +9,10 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
         // we're connected!
-        console.log("Connected correctly to server");
+        console.log("Connected correctly to server"+config.db);
       });
  
-      userModel.createDefaultUsers();     
+      // User.createDefaultUsers();     
 
 
 }
