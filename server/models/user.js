@@ -9,7 +9,8 @@ var  userSchema = new Schema(
   lastName:String,
   username:String,
   salt:String,
-  hashed_pwd:String
+  hashed_pwd:String,
+  polls:[{ type: Schema.Types.ObjectId, ref: 'Poll' }]
   
  
 });

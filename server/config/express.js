@@ -28,7 +28,10 @@ app.use(cookieParse());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(session({secret:'multivsion'}));
+app.use(session({ cookie: { maxAge: 3600000 }, //60000 is 1 min
+    secret: 'multivision',
+    resave: false, 
+    saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
 }

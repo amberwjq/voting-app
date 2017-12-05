@@ -7,7 +7,8 @@ var  pollSchema = new Schema(
   options:[{
     name:String,
     voted:Number
-  }]
+  }],
+  _creator : { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
    
@@ -27,7 +28,8 @@ if(collection.length === 0) {
     {
       name: "feichang hao",
       voted:0
-    }]});
+    }],
+    });
 
  }
 })

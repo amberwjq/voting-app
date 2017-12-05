@@ -1,6 +1,6 @@
-angular.module('app').controller('mvMainCtrl', function($scope,$http,mvNotifier,$location) {
+angular.module('app').controller('mvMainCtrl', function($scope,$http,mvNotifier,$location,mvIdentity) {
   console.log("IN MAIN CONTROLLER");
-
+  $scope.identity = mvIdentity;
 
   $http.get('/api/polls').then(function(response){
     if(response.data.success){
@@ -11,9 +11,6 @@ angular.module('app').controller('mvMainCtrl', function($scope,$http,mvNotifier,
     }
   })
   $scope.createNewPoll = function() {
-    
-    
-    
     var newpollData = {
       "subject": $scope.subject,
       "options": [{
@@ -25,21 +22,30 @@ angular.module('app').controller('mvMainCtrl', function($scope,$http,mvNotifier,
         voted:0
       }]
     }; 
-
-
-    console.log(newpollData.subject);
-    console.log("creat new poll function");
     $http.post('/api/createpoll',newpollData).then(function(response){
       if(response.data.success){
         mvNotifier.notify('New Poll created!');
         $scope.polls=response.data.polls;     
         $location.path('/poll');
+        $route.reload()
   
       }
       else {
           mvNotifier.error(response.data.reason)
       }
-    })
+    });
+    
+  };
+  $scope.filterMyPoll=function(){
+    console.log("In fileter my poll");
+    $http.get('/api/mypoll').then(function(response){
+      if(response.data.success){
+        $scope.polls=response.data.polls;     
+      }
+      else {
+          mvNotifier.error(response.data.reason)
+      }
+    })     
   }
 
 });

@@ -1,8 +1,9 @@
-angular.module('app').factory('mvIdentity', function() {
-
+angular.module('app').factory('mvIdentity', function($cookieStore) {
+  currentUser=$cookieStore.get("currentUser");
     return {
-      currentUser: undefined,
+      currentUser,
       isAuthenticated: function() {
+        
         return !!this.currentUser;
       },
 

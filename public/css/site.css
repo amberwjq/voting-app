@@ -14,19 +14,23 @@
     transition: background-color .5s ease 0s;
   
   }
-  
+  .list-group{
+    padding:0px 180px;
+
+}
   .navbar-brand{
-     color: black;
+     /* color: black; */
     font-size: 24px;
     margin-top: 5px;
   }
   .navbar-nav{
     
-      color: black;
+      /* color: black; */
     font-size: 14px;
     margin-top: 5px;
     
   }
+
   .banner {
     background: url("http://www.webdesigndev.com/wp-content/uploads/2014/09/5-Blurred-Backgrounds-Vol.1.jpg") no-repeat;
       /*background-attachment: fixed;*/
@@ -189,7 +193,7 @@
    top:70px;
  }
  .toast-success{
-   background-color: #d94c3a;
+   background-color: #1CB94E;
  }
 
  .poll-details{
@@ -198,3 +202,32 @@
   margin-top:100px;
   height: 500px;
  }
+
+ .axis path, .axis line {
+  fill: none;
+  stroke: #fff;
+}
+.axis text {
+  font-size: 13px;
+}
+.bar {
+  fill: #8CD3DD;
+}
+.bar:hover {
+  fill: #F56C4E;
+}
+svg text.label {
+fill:white;
+font: 15px;  
+font-weight: 400;
+text-anchor: middle;
+}
+#chart{
+min-width:250px;
+}
+#details{
+  margin-top:100px;
+}
+#allpoll{
+  margin-top:20px;
+}

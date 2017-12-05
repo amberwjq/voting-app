@@ -5,16 +5,19 @@ var crypto = require('crypto');
 var User = require('../models/user');
 var Poll = require('../models/poll');
 module.exports=function(app,passport){
-    // function isLoggedIn (req, res, next) {
-	// 	if (req.session.user) {
-	// 		return next();
-	// 	} else {
-	// 		res.sendFile(path+'/public/views/main.html');
-	// 	}
-	// }
+    function isLoggedIn (req, res, next) {
+        console.log("IN LOGGEDIN USER____"+req.session.user);
+		if (req.session.user) {
+			return next();
+		} else {
+            console.log("NOT LOGGED IN");
+            res.sendFile(path+'/public/views/main.html');
+		}
+	}
 
-
-app.get('/partials/*',function(req, res) {
+app.route('/partials/*')
+.get(function(req, res) {
+    console.log("I AM IN   "+req.params[0])
     res.sendFile(path+'/public/views/' + req.params[0]);
     });
 
@@ -32,6 +35,7 @@ app.route('/login')
 
 app.route('/logout')
     .post(function (req, res) {
+        req.session.user=null;
         req.logout();
        res.end();
     });
@@ -50,7 +54,8 @@ app.route('/api/signup')
             res.status(400);
             return res.send({reason:err.toString()});
           }
-          console.log("HERE!!!")
+          req.session.user = user; 
+          console.log('req.session.user is ' + req.session.user);  
           return res.send({success:true, user: user});
             
           })
@@ -65,32 +70,60 @@ app.get('/api/polls', function (req, res, next) {
                 res.send(err);
             }          
             return res.send({success:true, polls: polls});
-            });
-
-
+            });    
+    });
+app.route('/api/mypoll/*')
+.get(isLoggedIn, function (req, res, next) {
+    var user = req.params[0];
+    console.log('in routes get api/mypoll and user to find  '+ user);
+    if(req.session.user.username != user)
+    {
+        return res.send({success:false, reason: "unauthorized user"}); 
+    }    
+    User.findOne({ username : user}).exec(function(err, doc){
+        Poll
+            .find({ '_creator': doc._id})
+            .exec(function(err, polls){
+                if(err){
+                    res.send(err);
+                }
+                return res.send({success:true, polls: polls});
+                });
+    });
     
     });
+      
 app.get('/api/poll/*', function (req, res, next) {
     console.log('in detail routes');
     var path = req.params[0];
     console.log(path);
+    
     Poll.findOne({'subject':path})
         .exec(function(err, poll){
             if(err){
                 console.log("err!!!")
                 res.send(err);
             }          
-            return res.send({success:true, poll: poll});
+            console.log(poll._creator);
+            User.findOne({ "_id" : poll._creator}).exec(function(err, user){
+                if(err){
+                    console.log("err!!!")
+                    res.send(err);
+                }         
+            
+            return res.send({success:true, poll: poll,user:user});
             });
-
-
-
-
-    
+  
     });
+});  
 
- app.post('/api/createpoll',function(req, res) {
+ app.route('/api/createpoll')
+ .post(isLoggedIn,function(req, res) {
     var pollData = req.body;
+    pollData._creator=req.session.user._id;
+    console.log(pollData._creator);
+    console.log(pollData.subject);
+  
     Poll.create(pollData, function(err, poll) {
       if(err) {
         console.log("err!!!")
@@ -135,7 +168,24 @@ app.post('/api/updatepoll',function(req,res){
     });
   
   
-     
+    app.route('/api/poll/:id')
+    .delete(isLoggedIn, function (req, res, next) {
+        Poll.findById(req.params.id, function (err, poll) {
+            poll.remove(function (err, poll) {
+                if (err) {
+                    res.send(err);
+                }
+                Poll
+                    .find({'_creator': req.session.user._id})
+                    .exec(function (err, polls) {
+                        if (err) {
+                            res.send(err);
+                        }
+                        return res.send({success:true, polls: polls});
+                    });
+            })
+        })
+    });     
 
  app.route('*')
 .get(function (req, res) {

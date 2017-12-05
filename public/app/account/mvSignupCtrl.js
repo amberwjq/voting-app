@@ -1,4 +1,4 @@
-angular.module('app').controller('mvSignupCtrl', function($scope, mvNotifier, $location,$http,mvIdentity) {
+angular.module('app').controller('mvSignupCtrl', function($scope, mvNotifier, $location,$http,mvIdentity,$cookieStore) {
 
       $scope.signup = function() {
         if ($scope.password != $scope.repeat) 
@@ -15,10 +15,12 @@ angular.module('app').controller('mvSignupCtrl', function($scope, mvNotifier, $l
         
         $http.post('/api/signup',newUserData).then(function(response){
           if(response.data.success){
-              mvIdentity.currentUser=response.data.user;
-             
+            $cookieStore.put("currentUser",response.data.user);
+            $scope.identity.currentUser=$cookieStore.get("currentUser");
+            console.log("cookie store "+$cookieStore.get("currentUser"));               
               mvNotifier.notify('User account created!');
               $location.path('/poll');
+              $route.reload()
 
           }
           else {
