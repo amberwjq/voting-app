@@ -1,4 +1,4 @@
-angular.module('app').controller('mvSignupCtrl', function($scope, mvNotifier, $location,$http,mvIdentity,$cookieStore) {
+angular.module('app').controller('mvSignupCtrl', function($scope, mvNotifier, $location,$http,mvIdentity,$cookieStore,$route) {
 
       $scope.signup = function() {
         if ($scope.password != $scope.repeat) 
@@ -24,6 +24,7 @@ angular.module('app').controller('mvSignupCtrl', function($scope, mvNotifier, $l
 
           }
           else {
+            console.log("data reason"+response.data.reason);
               mvNotifier.error(response.data.reason)
           }
       })

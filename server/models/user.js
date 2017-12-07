@@ -7,11 +7,7 @@ var  userSchema = new Schema(
   
   firstName: {type:String, required:'{PATH} is required!'},
   lastName: {type:String, required:'{PATH} is required!'},
-  username: {
-    type: String,
-    required: '{PATH} is required!',
-    unique:true
-  },
+  username: { type: String, index: { unique: true },required:'{PATH} is required!'},
   salt: {type:String, required:'{PATH} is required!'},
   hashed_pwd: {type:String, required:'{PATH} is required!'},
   polls:[{ type: Schema.Types.ObjectId, ref: 'Poll' }]

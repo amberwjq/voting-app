@@ -47,11 +47,12 @@ app.route('/api/signup')
         userData.hashed_pwd = encrypt.hashPwd(userData.salt, userData.password);
         User.create(userData, function(err, user) {
           if(err) {
-            console.log("err!!!")
+            console.log("err"+err)
+            console.log("index    "+ err.toString().indexOf('E11000'));
             if(err.toString().indexOf('E11000') > -1) {
               err = new Error('Duplicate Username');
             }
-            res.status(400);
+            console.log("after rror____"+ err);
             return res.send({reason:err.toString()});
           }
           req.session.user = user; 
