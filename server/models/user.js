@@ -5,11 +5,15 @@ encrypt = require('../encryption');
 var  userSchema = new Schema(
 {
   
-  firstName:String,
-  lastName:String,
-  username:String,
-  salt:String,
-  hashed_pwd:String,
+  firstName: {type:String, required:'{PATH} is required!'},
+  lastName: {type:String, required:'{PATH} is required!'},
+  username: {
+    type: String,
+    required: '{PATH} is required!',
+    unique:true
+  },
+  salt: {type:String, required:'{PATH} is required!'},
+  hashed_pwd: {type:String, required:'{PATH} is required!'},
   polls:[{ type: Schema.Types.ObjectId, ref: 'Poll' }]
   
  
@@ -22,24 +26,5 @@ userSchema.methods = {
    
 
 var User = mongoose.model('User', userSchema);
-
-// function createDefaultUsers() {
-// User.find({}).exec(function(err, collection) {
-// if(collection.length === 0) {
-//   var salt, hash;
-//   salt = createSalt();
-//   hash = hashPwd(salt, 'joe');
-//   User.create({firstName:'Joe',lastName:'Eames',username:'joe', salt: salt, hashed_pwd: hash});
-//   salt = createSalt();
-//   hash = hashPwd(salt, 'john');
-//   User.create({firstName:'John',lastName:'Papa',username:'john', salt: salt, hashed_pwd: hash});
-//   salt = createSalt();
-//   hash = hashPwd(salt, 'dan');
-//   User.create({firstName:'Dan',lastName:'Wahlin',username:'dan', salt: salt, hashed_pwd: hash});
-// }
-// })
-// };
-
-// exports.createDefaultUsers = createDefaultUsers;
 
 module.exports=User
