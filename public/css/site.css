@@ -19,13 +19,13 @@
 
 }
   .navbar-brand{
-     /* color: black; */
+     color: black;
     font-size: 24px;
     margin-top: 5px;
   }
   .navbar-nav{
     
-      /* color: black; */
+      color: black;
     font-size: 14px;
     margin-top: 5px;
     
@@ -235,4 +235,28 @@ min-width:250px;
   color:rgb(165, 73, 73);
   font-size:9px;
   text-align: left;
+}
+
+/* a:hover {
+  color: #fff !important;
+} */
+
+p > a {
+  color:white;
+  font-weight: bold;
+}
+.navbar-inverse .navbar-nav>li>a:hover
+{
+  color: white;
+  font-weight: bold;
+}
+.navbar-inverse .navbar-brand:hover
+{
+  color: white;
+  font-weight: bold;
+}
+.navbar-inverse .navbar-brand:visited
+{
+  color: white;
+  font-weight: bold;
 }

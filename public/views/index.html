@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/vendor/toastr/toastr.css">
     <link rel="stylesheet"  href="/css/site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript"  src="/vendor/jquery/dist/jquery.js"></script> 
     <script type="text/javascript" src="/vendor/bootstrap/bootstrap.bundle.js"></script>
     <script type="text/javascript" src="/vendor/d3.min.js"></script>
@@ -32,7 +33,7 @@
                          <li><a href="#!login">Login</a></li>
                       </ul>
                       <ul class="nav navbar-nav pull-right" ng-show="identity.isAuthenticated()">               
-                        <li>Hello {{identity.currentUser.username}}</li>
+                        <li><a href="/" >Hello {{identity.currentUser.username}}</a></li>
                         <li><a href="/" ng-click="signout()">Logout</a></li>
                       
                     </ul>         
