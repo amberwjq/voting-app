@@ -6,7 +6,7 @@
          <h1>Dashboard</h1>
          <h4>What would you like to do today?</h4>
          <a href="#!newpoll" class="btn btn-success" role="button">New Poll</a>
-         <a href="#!mypoll" class="btn btn-primary" role="button">My Polls</a>
+         <a href="#!mypoll" class="btn btn-warning" role="button">My Polls</a>
          <a href="#!poll" class="btn btn-info" role="button">View ALL polls</a>    
       </div>
    </div>
@@ -25,10 +25,17 @@
   <div class="form-group">
     <label class="col-form-label" for="formGroupExampleInput2">Options</label>
     <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Code" ng-model="option1">
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Pepsi" ng-model="option2">    
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Pepsi" ng-model="option2">
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Option3" ng-model="option3" ng-show="lgtOne(clickCounter)">
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Option4" ng-model="option4" ng-show="lgtOne(clickCounter)">    
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Option5" ng-model="option5" ng-show="lgtTwo(clickCounter)">    
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Option6" ng-model="option6" ng-show="lgtTwo(clickCounter)">    
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Option7" ng-model="option7" ng-show="lgtThree(clickCounter)">    
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Option8" ng-model="option8" ng-show="lgtThree(clickCounter)">    
+
   </div>
 </form>       
-        <button type="button" class="btn btn-default">More Option</button> 
+        <button type="button" class="btn btn-default" ng-click="addOption()">More Option</button> 
         <br>
         <br>
         <button type="button" class="btn btn-success" ng-click="createNewPoll()">Submit</button>     

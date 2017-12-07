@@ -1,6 +1,7 @@
-angular.module('app').controller('mvMainCtrl', function($scope,$http,mvNotifier,$location,mvIdentity) {
+angular.module('app').controller('mvMainCtrl', function($scope,$http,mvNotifier,$location,mvIdentity,$route) {
   console.log("IN MAIN CONTROLLER");
   $scope.identity = mvIdentity;
+  $scope.clickCounter=0;
 
   $http.get('/api/polls').then(function(response){
     if(response.data.success){
@@ -11,16 +12,23 @@ angular.module('app').controller('mvMainCtrl', function($scope,$http,mvNotifier,
     }
   })
   $scope.createNewPoll = function() {
+    var optionArray=[];
+   $( ":input" ).each(function(index){
+    //$('#formGroupExampleInput2').find('input').each(function(){
+      
+      if((this.value !="") && (index>0))
+      {
+        
+        optionArray.push({
+          name:this.value,
+          voted:0
+        })
+      }
+  });
+    console.log(optionArray[1]);
     var newpollData = {
       "subject": $scope.subject,
-      "options": [{
-        name: $scope.option1,
-        voted:0
-      },
-      {
-        name: $scope.option2,
-        voted:0
-      }]
+      "options":optionArray
     }; 
     $http.post('/api/createpoll',newpollData).then(function(response){
       if(response.data.success){
@@ -47,5 +55,23 @@ angular.module('app').controller('mvMainCtrl', function($scope,$http,mvNotifier,
       }
     })     
   }
+  $scope.addOption=function(){
+   
+    $scope.clickCounter += 1;
+    console.log($scope.clickCounter);
+    
+  }
+  $scope.lgtOne= function(number){
+    if(number >= 1) return true
+    else return false
+  }
+  $scope.lgtTwo= function(number){
+    if(number >= 2) return true
+    else return false
+  }
+  $scope.lgtThree= function(number){
+    if(number >= 3) return true
+    else return false
+  }    
 
 });
